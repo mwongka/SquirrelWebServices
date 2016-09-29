@@ -19,16 +19,6 @@ class HomeContainer extends React.Component {
   }
 
   componentDidMount() {
-    axios.post('/test', {url:'http://www.slate.com/articles/news_and_politics/politics/2016/09/is_anyone_buying_donald_trump_s_debate_impression_of_a_small_government.html'})
-      .then(function(data){
-        console.log(data, 'this is the data from axios test');
-      })
-      .catch(function(err){
-        console.log(err);
-      })
-
-
-   
     //get user name and id
     axios.get('/checkAuth')
       .then((user) => {

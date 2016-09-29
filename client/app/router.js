@@ -25,23 +25,14 @@ const validate = function(nextState, replace, callback){
     console.log(err);
     callback(err);
   });
-
-  // if(check){
-  //   replace('login');
-  //   // done();
-  // } else {
-  //   // done();
-  // }
 };
-
-
-
-var routes = (
+// Not sure if validating into EACH component is effective and scalable? Maybe we need ONE validation entry point
+const routes = (
   <Router history={hashHistory}>
     <Route path='/' component={NavBarContainer}>
       <IndexRoute component={HomeContainer} onEnter={validate}/>
       <Route path='login' component={LoginContainer} />
-      <Route path='friends' component={FriendsContainer} />
+      <Route path='friends' component={FriendsContainer} onEnter={validate}/>
     </Route>
   </Router>
   );
