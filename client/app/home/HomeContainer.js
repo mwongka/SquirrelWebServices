@@ -12,39 +12,56 @@ class HomeContainer extends React.Component {
     this.state = {
       user: '',
       userArticles: [],
-      articlesFromFriends: []
+      userFriendsList: [],
+      articlesFromFriends: [],
     };
     this.getUserArticles = this.getUserArticles.bind(this);
   }
 
   componentDidMount() {
-    var context = this;
+    axios.post('/test', {url:'http://www.slate.com/articles/news_and_politics/politics/2016/09/is_anyone_buying_donald_trump_s_debate_impression_of_a_small_government.html'})
+      .then(function(data){
+        console.log(data, 'this is the data from axios test');
+      })
+      .catch(function(err){
+        console.log(err);
+      })
+
+
+   
     //get user name and id
     axios.get('/checkAuth')
-      .then(function(user) {
+      .then((user) => {
         //console.log(user, 'this is the data in componentWillMount');
-        context.setState({
+        this.setState({
           user: user.data,
           articles: [],
           userLinks: [],
           linksFromFriends: []
         });
       })
-      .then(function(user) {
+      .then((user) => {
         //get user articles
-        axios.get('http://wwww.localhost:8888/links/' + context.state.user.fbid)
-          .then(function(links) {
+        axios.get('http://wwww.localhost:8888/links/' + this.state.user.fbid)
+          .then((links) => {
             console.log('what links am i getting back???????', links);
             //getting back array of objects links.data = [{assignee: 'FriendsID', categoryId: '', createdAt: '...', id: int, likes: int, owner: 'userID', updatedAt: '...', 'url: 'url', userFbid: ''}, {link2}, {link3}]
-            context.setState({
+            this.setState({
               articles: links.data
             });
           })
-          .then(function(res) {
-            context.getUserArticles();
+          .then((res) => {
+            this.getUserArticles();
           });
         
-      });
+      })
+      .then((user) => {
+        axios.get('http://localhost:8888/friends/' + this.state.user.fbid)
+        .then((friends) => {
+          console.log(friends, 'friends yoloyolo')
+          this.setState({userFriendsList: friends.data.friends});
+        })
+      })
 
   }
 
