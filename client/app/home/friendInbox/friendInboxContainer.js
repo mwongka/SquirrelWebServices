@@ -11,7 +11,7 @@ class FriendInboxContainer extends React.Component {
   }
   render() {
     const articles = [];
-    for(var i = 0; i < 8; i ++){
+    for(var i = 0; i < 15; i ++){
       articles.push(<ArticleInfoWindowContainer key={i}/>)
     }
 
