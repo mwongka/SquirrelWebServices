@@ -2,5 +2,22 @@ import React, { PropTypes } from 'react';
 import { render } from 'react-dom';
 import { Router, Route, hashHistory, IndexRoute } from 'react-router';
 import router from './router';
+import { createStore, combineReducers } from 'redux'
+import { Provider } from 'react-redux'
+//import redux reducers
+import homeReducer from './redux/homeReducer';
 
-render(router, document.getElementById('app'));
+//add reducers here separated by commas
+const reducers = combineReducers({
+  homeReducer,
+})
+
+const store = createStore(reducers);
+
+console.log(store.getState());
+
+render(
+  <Provider store={store}> 
+    {router}
+  </Provider>
+  , document.getElementById('app'));
