@@ -28,6 +28,7 @@ export function updateUserArticles (userArticles) {
 // }
 
 export function updateArticlesFromFriends (articlesFromFriends) {
+  console.log(articlesFromFriends, 'inside reducer inceptioning')
   return {
     type: 'UPDATE_ARTICLES_FROM_FRIENDS',
     articlesFromFriends
@@ -84,7 +85,7 @@ export default function homeReducer(state = homeInitialState, action) {
       case 'UPDATE_ARTICLES_FROM_FRIENDS' :  
        return {
          ...state, 
-         ArticlesFromFriends: action.articlesFromFriends,
+         articlesFromFriends: action.articlesFromFriends,
       }
 
       case 'UPDATE_ARTICLE_REF' : 

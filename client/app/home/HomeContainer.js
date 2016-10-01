@@ -16,6 +16,7 @@ class HomeContainer extends React.Component {
       userFollowingList: PropTypes.array,
       articlesFromFriends: PropTypes.array,
       articlesFromFriendsRef: PropTypes.object,
+      // sortedUserArticles: PropTypes.object,
     };
 
   componentDidMount() {
@@ -27,7 +28,8 @@ class HomeContainer extends React.Component {
     })
     .then((data) => {
       console.log(data, 'what is at position 1')
-      this.props.dispatch(homeActions.updateArticles(data.data[0]))
+      this.props.dispatch(homeActions.updateArticles(data.data[0]));
+      this.props.dispatch(homeActions.updateArticlesFromFriendsRef(data.data[1]));
     })
     .catch((err)=> {
       console.log(err)
@@ -63,15 +65,9 @@ class HomeContainer extends React.Component {
         }
       });
 
-      console.log(articlesFromFriends, 'articles from friends');
-
     //SOMEHOW COMBINE THESE TWO BELOW
-    this.props.dispatch(homeActions.updateUserArticles(userArticles));
-    setTimeout(()=>{
-      console.log('iran');
+      this.props.dispatch(homeActions.updateUserArticles(userArticles));
       this.props.dispatch(homeActions.updateArticlesFromFriends(articlesFromFriends));
-    }, 2000)
-    // this.props.dispatch(homeActions.updateArticlesFromFriends(articlesFromFriends));
   }
 
   render() {
