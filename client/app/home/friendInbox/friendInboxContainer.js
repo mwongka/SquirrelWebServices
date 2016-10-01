@@ -4,12 +4,12 @@ import ArticleInfoWindowContainer from '../articleInfoWindow/articleInfoWindowCo
 import { connect } from 'react-redux';
 
 class FriendInboxContainer extends React.Component {
-  static PropTypes = {
-    articles: PropTypes.array,
-  };
+  // static PropTypes = {
+  //   articles: PropTypes.array,
+  // };
 
   render() {
-    console.log(this.props.articles, 'what>??! TEST');
+    console.log(this.props.articles, 'what is here');
     const mappedArticles = this.props.articles.map((item, idx) => {
       return (<ArticleInfoWindowContainer key={idx} url={item.url} createdAt={item.createdAt} assignee={item.assignee}/>);
     });
@@ -21,11 +21,12 @@ class FriendInboxContainer extends React.Component {
   }
 }
 
-function mapStateToProps(state) {
-  console.log(state, 'state state');
-  return {
-    articles: state.homeReducer.articlesFromFriends
-  }
-}
+// function mapStateToProps(state) {
 
-export default connect(mapStateToProps)(FriendInboxContainer);
+//   return {
+//     articles: state.homeReducer.articlesFromFriends
+//   }
+// }
+
+// export default connect(mapStateToProps)(FriendInboxContainer);
+export default FriendInboxContainer;

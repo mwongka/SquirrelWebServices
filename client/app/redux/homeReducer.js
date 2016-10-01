@@ -1,5 +1,6 @@
 // ------ ACTIONS FOR USER REDUCER --------- //
 export function updateUser (user) {
+
   return {
     type: 'UPDATE_USER',
     user
@@ -28,7 +29,6 @@ export function updateUserArticles (userArticles) {
 // }
 
 export function updateArticlesFromFriends (articlesFromFriends) {
-  console.log(articlesFromFriends, 'inside reducer inceptioning')
   return {
     type: 'UPDATE_ARTICLES_FROM_FRIENDS',
     articlesFromFriends

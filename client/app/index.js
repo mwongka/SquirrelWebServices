@@ -6,10 +6,12 @@ import { createStore, combineReducers } from 'redux'
 import { Provider } from 'react-redux'
 //import redux reducers
 import homeReducer from './redux/homeReducer';
+import inputBarReducer from './redux/inputBarReducer';
 
 //add reducers here separated by commas
 const reducers = combineReducers({
   homeReducer,
+  inputBarReducer,
 })
 
 const store = createStore(reducers);
