@@ -14,7 +14,6 @@ const reducers = combineReducers({
 
 const store = createStore(reducers);
 
-console.log(store.getState());
 
 render(
   <Provider store={store}> 

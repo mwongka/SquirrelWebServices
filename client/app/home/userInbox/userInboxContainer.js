@@ -1,37 +1,15 @@
 import React, { PropTypes } from 'react';
 import UserInboxPresentational from './UserInboxPresentational';
 import ArticleInfoWindowContainer from '../articleInfoWindow/articleInfoWindowContainer';
-
+import { connect } from 'react-redux';
+import * as inboxActions from '../../redux/userInboxReducer'; //<== do I need this?
+// import homeReducer from '../../redux/homeReducer';
 
 class UserInboxContainer extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      sortedUserArticles: []
-    };
-    this.sortArticlesByCreatedAt = this.sortArticlesByCreatedAt.bind(this);
-  }
-
-  componentWillMount() {
-    this.sortArticlesByCreatedAt();
-  }
-  
-  sortArticlesByCreatedAt() {
-    var sorted = this.props.articles.sort(function(a, b) {
-      if (a.createdAt < b.createdAt) {
-        return 1;
-      }
-      if (a.createdAt > b.createdAt) {
-        return -1;
-      }
-      return 0;
-
-    });
-    this.setState({
-      sortedUserArticles: sorted
-    });
-    console.log('these articles are sorted>>>>>>>>', sorted);
-  }
+  static PropTypes = {
+    articles: PropTypes.array,
+    user: PropTypes.object,
+  };
 
   render() {
     var mappedArticles = this.props.articles.map((item, idx) => {
@@ -45,4 +23,11 @@ class UserInboxContainer extends React.Component {
   }
 }
 
-export default UserInboxContainer;
+function mapStateToProps(state) {
+  return {
+    articles: state.homeReducer.userArticles,
+    user: state.homeReducer.user, 
+  }
+}
+
+export default connect(mapStateToProps)(UserInboxContainer);

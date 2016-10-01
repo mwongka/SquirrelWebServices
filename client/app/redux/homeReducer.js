@@ -20,17 +20,24 @@ export function updateUserArticles (userArticles) {
   }
 }
 
-export function updateUserFriends (userFriends) {
-  return {
-    type: 'UPDATE_USER_FRIENDS',
-    userFriends
-  }
-}
+// export function updateUserFollowingFriends (userFriends) {
+//   return {
+//     type: 'UPDATE_USER_FRIENDS',
+//     userFriends
+//   }
+// }
 
 export function updateArticlesFromFriends (articlesFromFriends) {
   return {
     type: 'UPDATE_ARTICLES_FROM_FRIENDS',
     articlesFromFriends
+  }
+}
+
+export function updateArticlesFromFriendsRef (ref) {
+  return {
+    type: 'UPDATE_ARTICLE_REF',
+    ref,
   }
 }
 
@@ -41,8 +48,9 @@ const homeInitialState = {
   user: {},
   articles: [],
   userArticles: [],
-  userFriendsList: [],
+  userFollowingList: [],
   articlesFromFriends: [],
+  articlesFromFreindsRef: {},
 }
 
 // ---- HOME REDUCER FUNCTION -------- //
@@ -55,7 +63,7 @@ export default function homeReducer(state = homeInitialState, action) {
        user: action.user,
      }
 
-     case 'UPDATE_USER_ARTICLES' :  
+     case 'UPDATE_ARTICLES' :  
       return {
         ...state, 
         articles: action.articles,
@@ -67,16 +75,24 @@ export default function homeReducer(state = homeInitialState, action) {
          userArticles: action.userArticles,
       }
 
-      case 'UPDATE_USER_ARTICLES' :  
+      // case 'UPDATE_USER_FRIENDS' :  
+      //  return {
+      //    ...state, 
+      //    userFollowingList: action.userFriends,
+      // }
+
+      case 'UPDATE_ARTICLES_FROM_FRIENDS' :  
        return {
          ...state, 
-         userArticles: action.userFriends,
+         ArticlesFromFriends: action.articlesFromFriends,
       }
 
-       case 'UPDATE_ARTICLES_FROM_FRIENDS' :  
-       return {
-         ...state, 
-         ArticlesFromFriends: action.ArticlesFromFriends,
-      }
+      case 'UPDATE_ARTICLE_REF' : 
+         return {
+          articlesFromFreindsRef: action.ref,
+         }
+
+      default: 
+      return state
   }
 }

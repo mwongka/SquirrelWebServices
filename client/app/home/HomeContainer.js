@@ -9,23 +9,13 @@ import { connect } from 'react-redux'
 import { Scrollbars } from 'react-custom-scrollbars';
 
 class HomeContainer extends React.Component {
-  // constructor(props) {
-  //   super(props);
-  //   // this.state = {
-  //   //   user: {},
-  //   //   articles: [],
-  //   //   userArticles: [],
-  //   //   userFriendsList: [],
-  //   //   articlesFromFriends: [],
-  //   // };
-  // }
-
   static propTypes = {
       user: PropTypes.object,
       articles: PropTypes.array,
       userArticles: PropTypes.array,
-      userFriendsList: PropTypes.array,
+      userFollowingList: PropTypes.array,
       articlesFromFriends: PropTypes.array,
+      articlesFromFriendsRef: PropTypes.object,
     };
 
   componentDidMount() {
@@ -35,48 +25,53 @@ class HomeContainer extends React.Component {
       this.props.dispatch(homeActions.updateUser(user.data))
       return axios.get('http://wwww.localhost:8888/links/' + user.data.fbid)
     })
-    .then((links) => {
-      // console.log(this.state.user, 'working here?');
-      // console.log(links, 'links links links');
-      this.props.dispatch(homeActions.updateArticles(links[0]))
-      .then(()=>{
-        this.sortArticles();
-      // this.setState({articles: links.data[0]}, ()=>{
-        // this.sortArticles();
-      });
+    .then((data) => {
+      console.log(data, 'what is at position 1')
+      this.props.dispatch(homeActions.updateArticles(data.data[0]))
     })
     .catch((err)=> {
       console.log(err)
     })
   }
 
-  shouldComponentUpdate(state, props){
-    console.log(state, props);
-    return true;
+  componentDidUpdate(prevProps){
+    if(prevProps.articles !== this.props.articles) {
+      this.sortArticles();
+    }
+    return true;  
   }
 
   sortArticles() {
-    console.log(this.state.user.fbid, 'testing this once');
 
     const userArticles = this.props.articles.filter((link) => {
         return link.assignee === this.props.user.fbid;
       }).map((item) => {
         return {url: item.url, createdAt: item.createdAt};
+      }).sort((a, b) => {
+        if (b.createdAt > a.createdAt){
+          return true;
+        }
       });
 
     const articlesFromFriends = this.props.articles.filter((link) => {
         return link.assignee !== this.props.user.fbid;
       }).map((item) => {
         return {assignee: item.assignee, url: item.url, createdAt: item.createdAt};
+      }).sort((a, b) => {
+        if (b.createdAt > a.createdAt){
+          return true;
+        }
       });
 
-    // this.setState({
-    //   userArticles: userArticles,
-    //   articlesFromFriends: articlesFromFriends, 
-    // });
+      console.log(articlesFromFriends, 'articles from friends');
+
     //SOMEHOW COMBINE THESE TWO BELOW
-    this.props.dispatch(homeReducer.updateUserArticles(userArticles));
-    this.props.dispatch(homeReducer.updateArticlesFromFriends(articlesFromFriends));
+    this.props.dispatch(homeActions.updateUserArticles(userArticles));
+    setTimeout(()=>{
+      console.log('iran');
+      this.props.dispatch(homeActions.updateArticlesFromFriends(articlesFromFriends));
+    }, 2000)
+    // this.props.dispatch(homeActions.updateArticlesFromFriends(articlesFromFriends));
   }
 
   render() {
@@ -87,12 +82,12 @@ class HomeContainer extends React.Component {
         <div className='row inboxmain'>
           <div className='col s8 grey lighten-5'>
             <Scrollbars style={{ height: 600 }}>
-              <UserInboxContainer user={this.props.user} articles={this.props.userArticles}/>
+              <UserInboxContainer/>
             </Scrollbars>
           </div>
           <div className='col s4 grey lighten-3'>
             <Scrollbars style={{ height: 600 }}>
-              <FriendInboxContainer user={this.props.user} articles={this.props.articlesFromFriends} />
+              <FriendInboxContainer user={this.props.user}/>
             </Scrollbars>
           </div>
         </div>
@@ -103,13 +98,13 @@ class HomeContainer extends React.Component {
 }
 
 function mapStateToProps(state){
-  console.log(state);
   return {
     user: state.homeReducer.user,
     articles: state.homeReducer.articles,
     userArticles: state.homeReducer.userArticles,
     userFriendsList: state.homeReducer.userFriendsList,
-    articlesFromFriends: state.homeReducer.articlesFromFriends, //<=== shouldnt have to do this...? 
+    articlesFromFriends: state.homeReducer.articlesFromFriends,
+    articlesFromFriendsRef: state.homeReducer.articlesFromFriendsRef, //<=== shouldnt have to do this...? 
   }
 }
 export default connect(mapStateToProps)(HomeContainer);

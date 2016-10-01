@@ -46,7 +46,7 @@ module.exports.passportConfig = function(passport){
     profileFields: FBprofileFields,
   },
     function(accessToken, refreshToken, profile, done) {
-      console.log(profile.photos[0].value, 'what is this thing?');
+      console.log(profile, 'profile1');
       var apiFields = options(profile.id, profile.displayName, profile.photos[0].value)
 
       rp(apiFields) //<===== server-side http request
