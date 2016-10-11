@@ -48,7 +48,7 @@ class LoginContainer extends React.Component {
   getLandingArticles() {
     //get most recent 20 articles from redis
     console.log('in getLandingArticles over!');
-    axios.get('http://localhost:3333/getMostRecent')
+    axios.get('/getMostRecent')
       .then((res) => {
         this.setState({
           articles: res.data

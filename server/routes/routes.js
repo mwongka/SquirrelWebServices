@@ -128,4 +128,14 @@ module.exports = function(app) {
       res.send(err);
     })
   });
+
+   app.get('/getMostRecent', function(req, res, next) {
+    rp('http://localhost:3333/getMostRecent')
+    .then(function(data){
+      res.send(data);
+    })
+    .catch(function(err){
+      res.send(err);
+    })
+   })
 }
