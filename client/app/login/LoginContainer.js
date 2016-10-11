@@ -17,11 +17,14 @@ class LoginContainer extends React.Component {
     e.preventDefault();
     const username = this.state.username;
     const password = this.state.password;
+
+    console.log(process.env, 'PROCESS STUFF?');
     // this.username.value = '';
     // this.password.value = '';
-    axios.post('http://localhost:3010/login2', {username: username, password: password})
+    axios.post('/login2', {username: username, password: password})
+    // axios.get('http://db:8888/test')
     .then((data) => {
-      console.log(data.data, 'data.data');
+      console.log(data, 'did it work? PLEASE WORK!');
       this.context.router.push('/home');
     })
     .catch((err) => {

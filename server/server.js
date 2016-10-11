@@ -9,6 +9,8 @@ var cors = require('cors');
 var request = require('request');
 var cheerio = require('cheerio');
 var APIKeys = require('./config');
+var rp = require('request-promise');
+var routes = require('./routes/routes');
 
 //passport configuration
 var passportConfig = require('./authConfig').passportConfig;
@@ -34,13 +36,20 @@ app.use(passport.session());
 
 passportConfig(passport);
 //API ROUTES 
-app.get('/auth/facebook', passport.authenticate('facebook'));
+app.get('/auth/facebook', function(req, res, next){console.log('docker testing 1234'); next();}, passport.authenticate('facebook'));
+
+app.get('/testing', function(req, res, next){
+  rp('http://db:8888/test')
+  .then(function(data) {
+    res.send(data);
+  })
+});
 
 app.post('/login2', passport.authenticate('local', { successRedirect: '/#/home',
                                                      failureRedirect: '/' }));
 
-app.post('/signup', passport.authenticate('local', { successRedirect: '/#/home',
-                                                     failureRedirect: '/signup' }));
+// app.post('/signup', passport.authenticate('local', { successRedirect: '/#/home',
+                                                     // failureRedirect: '/signup' }));
 //check to see req session?
 app.get('/checkAuth', function(req, res){
   res.send(req.user);
@@ -91,6 +100,8 @@ app.get('/logout', function(req, res){
   req.logout();
   res.redirect('/');
 });
+
+routes(app);
 
 
 app.listen('3010', function() {

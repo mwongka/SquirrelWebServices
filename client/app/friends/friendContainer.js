@@ -32,7 +32,7 @@ class FriendContainer extends React.Component {
           user: user.data,
         });
         // console.log('who is the user in FriendContainer>>>>', user.data);
-        axios.get('http://wwww.localhost:8888/friends/' + this.state.user.fbid)
+        axios.get('/friends/' + this.state.user.fbid)
           .then((friends) => {
             // console.log('i am in FriendContainer get req =====>>>>>', friends);
             //friends.data = [{fbid:...,fbname:...,links:[...]}, {friend2}]
@@ -41,14 +41,12 @@ class FriendContainer extends React.Component {
             });
           })
           .catch((err) => {
-            console.log('There is an err in friendContainer, it\'s a sad day D=', err);
+            console.log(err);
           });
-
       })
       .catch((err) => {
-        console.log('There is an error in friendContainer getting user, it\'s a sad day D=', err);
+        console.log(err);
       });
-
   }
 
   updateFriendArticles(friend) {

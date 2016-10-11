@@ -14,7 +14,7 @@ class FriendSearchResultContainer extends React.Component {
   //put friend to db
   addFriend(friendId) {
     console.log('are you getting friendId', this.props.user.fbid);
-    axios.put('http://localhost:8888/friends/' + this.props.user.fbid, {friend: friendId})
+    axios.put('/friends/' + this.props.user.fbid, {friend: friendId})
       .then((res) => {
         console.log('you have successfully added this person to the stalking list');
         //re-render friend's list with new person
