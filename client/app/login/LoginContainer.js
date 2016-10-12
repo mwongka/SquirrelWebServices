@@ -27,7 +27,7 @@ class LoginContainer extends React.Component {
     const password = this.state.password;
     // this.username.value = '';
     // this.password.value = '';
-    axios.post('http://localhost:3010/login2', {username: username, password: password})
+    axios.post('/login2', {username: username, password: password})
     .then((data) => {
       console.log(data.data, 'data.data');
       this.context.router.push('/home');
