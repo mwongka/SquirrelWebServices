@@ -15,7 +15,7 @@ services:
       - "8888:8888"
     command: npm start
   dbredis: 
-    image: squirrel-redis
+    image: mwongka/squirrel--db-redis:latest
     ports: 
       - "3333:3333"
     links:
