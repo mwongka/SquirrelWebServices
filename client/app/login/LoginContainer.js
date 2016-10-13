@@ -23,6 +23,7 @@ class LoginContainer extends React.Component {
     this.getLandingArticles();
   }
   handleSubmit(e) {
+    //are we getting here?
     e.preventDefault();
     const username = this.state.username;
     const password = this.state.password;

@@ -43,7 +43,6 @@ app.get('/auth/facebook', passport.authenticate('facebook'));
 app.post('/login2', passport.authenticate('local'), function(req, res){
   console.log('HAWAII', req.user);
   res.sendStatus(200);
-
 });
 
 // app.post('/signup', passport.authenticate('local', { successRedirect: '/#/home',
