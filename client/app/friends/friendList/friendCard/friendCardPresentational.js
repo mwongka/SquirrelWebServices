@@ -17,7 +17,7 @@ const friendHeaderStyle = {
   borderTopRightRadius: '3px',
   borderTopLeftRadius: '3px',
   width: '100%',
-  background: 'rgba(245, 190, 156, 0.97)',
+  background: 'white',
 }
 
 const friendFooterStyle = {
