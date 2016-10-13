@@ -32,8 +32,8 @@ const routes = (
     <Route path='/' component={NavBarContainer}>
       <IndexRoute component={LoginContainer}/>
       <Route path='signup' component={SignUpContainer}/>
-      <Route path='home' component={HomeContainer} onEnter={validate}/>
-      <Route path='friends' component={FriendContainer} onEnter={validate}/>
+      <Route path='home' component={HomeContainer} />
+      <Route path='friends' component={FriendContainer} />
     </Route>
   </Router>
   );
