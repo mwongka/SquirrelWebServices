@@ -37,8 +37,14 @@ passportConfig(passport);
 //API ROUTES 
 app.get('/auth/facebook', passport.authenticate('facebook'));
 
-app.post('/login2', passport.authenticate('local', { successRedirect: '/#/home',
-                                                     failureRedirect: '/' }));
+// app.post('/login2', passport.authenticate('local', { successRedirect: '/#/home',
+//                                                      failureRedirect: '/' }));
+
+app.post('/login2', passport.authenticate('local'), function(req, res){
+  console.log('YOOOOOOLOOOOOOOOO', req);
+  res.sendStatus(200);
+
+});
 
 // app.post('/signup', passport.authenticate('local', { successRedirect: '/#/home',
 //                                                      failureRedirect: '/signup' }));
