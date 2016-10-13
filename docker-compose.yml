@@ -2,7 +2,7 @@ version: '2'
 
 services:
   web:
-    image: squirrel-web-docker:6.2
+    image: squirrel-web-docker:6.5
     # image: mwongka/squirrel-web-docker:latest
     ports:
       - "3010:3010"
