@@ -3,6 +3,7 @@ import LoginPresentational from './LoginPresentational';
 import LoginTrendingPresentational from './LoginTrendingPresentational';
 import axios from 'axios';
 import Modal from 'react-modal';
+
 class LoginContainer extends React.Component {
   constructor(props) {
     super(props);
@@ -25,11 +26,14 @@ class LoginContainer extends React.Component {
     e.preventDefault();
     const username = this.state.username;
     const password = this.state.password;
+    console.log(username, 'mike');
+    console.log(password, 'mike');
+
     // this.username.value = '';
     // this.password.value = '';
     axios.post('/login2', {username: username, password: password})
     .then((data) => {
-      console.log(data.data, 'data.data');
+      console.log(data.data, 'data.data, should be pushing user to main page with this.context.router');
       this.context.router.push('/home');
     })
     .catch((err) => {
@@ -67,7 +71,7 @@ class LoginContainer extends React.Component {
     this.setState({modalIsOpen: false});
   }
   render() {
-    console.log('what is this.state.articles in login>>>>>>', this.state.articles);
+    // console.log('what is this.state.articles in login>>>>>>', this.state.articles);
     var mappedArticles = this.state.articles.map((item, index) => {
       if (item !== null) {
         return (<LoginTrendingPresentational article={item} key={index} index={index} modalIsOpen={this.state.modalIsOpen}/>);

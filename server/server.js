@@ -41,7 +41,7 @@ app.get('/auth/facebook', passport.authenticate('facebook'));
 //                                                      failureRedirect: '/' }));
 
 app.post('/login2', passport.authenticate('local'), function(req, res){
-  console.log('YOOOOOOLOOOOOOOOO', req);
+  console.log('HAWAII', req.user);
   res.sendStatus(200);
 
 });
@@ -90,13 +90,6 @@ app.get('/auth/facebook/callback',
     failureRedirect: 'http://localhost:3010/'
   }));
 
-app.get('/auth/twitter', passport.authenticate('twitter'));
-
-app.get('/auth/twitter/callback',
-  passport.authenticate('twitter', {
-    successRedirect: '/',
-    failureRedirect: '/login'
-  }));
 
 app.get('/logout', function(req, res) {
   req.logout();
