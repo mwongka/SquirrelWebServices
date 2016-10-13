@@ -621,11 +621,12 @@ body {
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
-  justify-content: flex-start;
+  justify-content: center;
   bottom: 0;
-  width: 100%;
+  width: 1100px;
   height: 450px;
   overflow: hidden;
+  margin-top: 20px;
 }
 .npm-modal-default {
   position: fixed;
@@ -644,12 +645,20 @@ body {
   color: grey;
 }
 .footer-header {
-  font-size: 20px;
+  font-size: 30px;
   font-family: 'Shrikhand', cursive;
   color: #fff;
 }
 .footer-text {
   font-size: 18px;
+  color: #fff;
+}
+.footer-icon {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
 }
 .page-footer {
   background-color: #ff7043 !important;
@@ -774,4 +783,6 @@ body {
   top: 15px;
   position: absolute;
 }
+
+
 

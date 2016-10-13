@@ -72,7 +72,7 @@ class LoginContainer extends React.Component {
     this.setState({modalIsOpen: false});
   }
   render() {
-    // console.log('what is this.state.articles in login>>>>>>', this.state.articles);
+    console.log('what is this.state.articles in login>>>>>>', this.state.articles);
     var mappedArticles = this.state.articles.map((item, index) => {
       if (item !== null) {
         return (<LoginTrendingPresentational article={item} key={index} index={index} modalIsOpen={this.state.modalIsOpen}/>);
@@ -81,7 +81,7 @@ class LoginContainer extends React.Component {
     return (
       <div>
           <div onClick={this.openModal}>
-            <div className="row">
+            <div className="row" style={{display: 'flex', justifyContent: 'center'}}>
               <div className="col s12 m6 parallax" className='landing-container'>
                 {mappedArticles}
               </div>
@@ -94,19 +94,19 @@ class LoginContainer extends React.Component {
                 <h5 className="footer-text"><span className="footer-header">Squirrel</span></h5>
                 <p className="grey-text text-lighten-4">You can use rows and columns here to organize your footer content.</p>
               </div>
-              <div className="col s4">
+              <div className="col s4 footer-icon">
                 <h5 className="footer-text">Save</h5>
                 <ul>
                   <li><i className="material-icons md-48 white600">archive</i></li>
                 </ul>
               </div>
-              <div className="col s4">
+              <div className="col s4 footer-icon">
                 <h5 className="footer-text">Read</h5>
                 <ul>
                   <li><i className="material-icons md-48 white600">portable_wifi_off</i></li>
                 </ul>
               </div>
-              <div className="col s4">
+              <div className="col s4 footer-icon">
                 <h5 className="footer-text">Share</h5>
                 <ul>
                   <li><i className="material-icons md-48 white600">face</i></li>
