@@ -9,8 +9,8 @@ const NavBarPresentationalLoggedOut = (props) => {
             <a href="#" className="brand-logo">Squirrel.io</a>
 
             <ul id="nav-mobile" className="right navbarLand">
-             <li><a style={{color: 'grey'}} href="#/signup">SignUp</a></li>
-             <li><a href="http://www.filedropper.com/squirrel"><button className="downloadBtn">DOWNLOAD MAC APP</button></a></li>
+             <li><a className='navbar_a_hover' style={{color: 'grey'}} href="#/signup">SignUp</a></li>
+             <li><a className='navbar_a_btn' href="http://www.filedropper.com/squirrel"><button className="downloadBtn">DOWNLOAD APP</button></a></li>
            </ul>
          </div>
        </nav>
