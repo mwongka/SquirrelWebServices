@@ -31,7 +31,7 @@ services:
     ports: 
       - "6379"
   recommendations:
-    image: squirrel-recommender-docker:latest
+    image: mwongka/squirrel-recommender-docker:latest
     ports:
       - "3121:3121"
     command: npm start
